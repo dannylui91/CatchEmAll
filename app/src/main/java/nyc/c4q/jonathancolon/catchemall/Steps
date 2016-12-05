@@ -1,0 +1,55 @@
+What is cupboard?
+Cupboard is used to store java objects into a SQLiteDatabase. 
+It works by mapping java classes to database tables and mapping java class member variables to the table columns.
+Through this process, each table maps to a Java model and the columns in the table represent the respective data fields.
+Made specifically for Android, it was meant to abstract away alot of boilerplate and reused code that would go into making SQLiteOpenHelper function.
+
+What is SQLiteOpenHelper?
+It is used to create and manage the database connection.
+
+What is stetho?
+It lets you see whats in your database through your Chrome browser, great for debugging.
+You can also modify data directly in the database with SQL commands.
+
+1. import cupboard - compile 'nl.qbusict:cupboard:2.1.4' (version 2.1.4 at this time)
+2. import stetho - compile 'com.facebook.stetho:stetho:1.4.1' (optional but helpful)
+
+3. create a models package and define a Model called Prisoner
+   note: a Model will be a single table in the database with columns as the fields in that Model
+   ****: a Model must have a field Long variable _id, leave it alone, don't use it in constructors/getters/setters it serves as a unique id in the database (called primary key in SQL)
+         a database can have multiple tables
+
+4. create a custom SQLiteOpenHelper (extend this)
+   note: our PrisonerDatabaseHelper extends SQLiteOpenHelper and we're making it a singleton class
+
+5. create an instance of SQLiteDatabase with SQLiteOpenHelper in MainActivity
+   example: PrisonerDatabaseHelper dbHelper = new PrisonerDatabaseHelper(this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+6. create a single Prisoner object and put it in the database, cupboard does it all for you
+   example: Prisoner prisoner = new Prisoner("Jon", Calendar.getInstance().getTimeInMillis());
+            cupboard().withDatabase(db).put(prisoner);
+
+7. look up other things you can do with cupboard
+
+Using stetho
+1. import stetho if you haven't
+2. add INTERNET permissions to manifest
+3. make a custom Application class
+   example: MyApplication extends Application
+            In the onCreate() method
+            public void onCreate() {
+                super.onCreate();
+                Stetho.initializeWithDefaults(this);
+            }
+4. since you extended your Application with MyApplication you'll need to add it to the manifest
+   within <Application
+              android:name=".MyApplication" <-- add this new line
+              ...
+          </Application>
+5. run the program, open up chrome browser and type chrome://inspect in the url
+   under devices, you should see YourAppName (powered by Stetho) with inspect underneath click inspect
+   you can see your database under the Resources tab -> Web SQL -> yourDatabaseName.db -> yourTableName
+6. to modify data in your database click back to yourDatabaseName.db hierarchy and put your search queries there in SQL
+
+
