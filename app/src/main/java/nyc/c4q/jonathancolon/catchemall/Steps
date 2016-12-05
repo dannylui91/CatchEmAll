@@ -11,6 +11,8 @@ What is stetho?
 It lets you see whats in your database through your Chrome browser, great for debugging.
 You can also modify data directly in the database with SQL commands.
 
+Note: Nothing will be shown on the phone, only in console will you see my System.out.printlns
+
 1. import cupboard - compile 'nl.qbusict:cupboard:2.1.4' (version 2.1.4 at this time)
 2. import stetho - compile 'com.facebook.stetho:stetho:1.4.1' (optional but helpful)
 
