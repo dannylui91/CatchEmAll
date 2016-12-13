@@ -44,6 +44,9 @@ Used to start a service when your phone boots without having the application ope
    WakefulBroadcastReceiver.completeWakefulIntent(intent);
    -so the device can go back to sleep after the service is launched
 
+9. Starting a notification in your Service class -> where you write code to do your task, write code to show a notification
+
+
 
 
 

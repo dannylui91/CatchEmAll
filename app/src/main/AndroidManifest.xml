@@ -18,12 +18,13 @@
 
         <receiver
             android:name=".MyAlarmReceiver"
-            android:process=":remote" >
-        </receiver>
+            android:process=":remote"></receiver>
 
         <service
             android:name=".MyTestService"
             android:exported="false" />
+
+        <activity android:name=".SecondActivity"></activity>
     </application>
 
 </manifest>
