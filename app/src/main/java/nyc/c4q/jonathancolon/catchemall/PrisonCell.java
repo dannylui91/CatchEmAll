@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import static android.view.View.GONE;
 
@@ -45,7 +44,6 @@ public class PrisonCell extends AppCompatActivity {
         setSkintoneLayer(prisoner.getSkintone());
         setHairLayer(prisoner.getHairStyle());
         setBeardLayer(prisoner.getBeard());
-        Toast.makeText(this, prisoner.getLastInspected().toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void setBeardLayer(int beard) {
