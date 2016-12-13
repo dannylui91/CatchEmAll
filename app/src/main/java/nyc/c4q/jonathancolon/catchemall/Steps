@@ -1,0 +1,49 @@
+What is a service?
+Service is a component which runs in the background without direct interaction with the user.
+It has no user interface and not bound to any android life cycles.
+IntentService class is an example of a service that we can run in a separate background thread/process even if the application is closed.
+
+What is an AlarmManager?
+Can trigger services at a specified time.
+
+What is a BroadcastReceiver?
+Used to receive a broadcast which can be triggered by the Alarm given by the AlarmManager.
+
+What is a WakefulBroadcastReceiver?
+Used to start a service when your phone boots without having the application opened.
+
+0. In MainActivity is where you schedule and create the AlarmManager
+1. Create the Service which extends IntentService -> your operations/calculations go in there
+2. Create MyAlarmReceiver which extends BroadcastReceiver -> after receiving the broadcast given by the AlarmManager at the specified time, start the Service ^
+3. Add to manifest within the receiver and the service
+    <Application>
+         ...
+         <receiver
+             android:name=".MyAlarmReceiver"
+             android:process=":remote" >
+         </receiver>
+
+         <service
+             android:name=".MyTestService"
+             android:exported="false" />
+    </Application>
+
+5. To start the service on boot up you'll need to restart your phone once you implemented these steps
+6. Create BootBroadcastReceiver extends WakefulBroadcastReceiver
+7. Add to manifest within
+   <Application>
+       ...
+       <receiver android:name="com.codepath.example.BootBroadcastReceiver">
+           <intent-filter>
+               <action android:name="android.intent.action.BOOT_COMPLETED" />
+           </intent-filter>
+       </receiver>
+   </Application>
+
+8. In your Service class, you'll need to add this line in your onHandleIntent() method
+   WakefulBroadcastReceiver.completeWakefulIntent(intent);
+   -so the device can go back to sleep after the service is launched
+
+
+
+
