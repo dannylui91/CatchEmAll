@@ -20,6 +20,8 @@ import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerBuilder;
  * Created by Danny on 12/13/2016.
  */
 public class MyService extends IntentService {
+    public static boolean hasStarted = false;
+    private static Long lastCreatedPrisoner = System.currentTimeMillis();
 
     public MyService() {
         super("MyService");
@@ -29,19 +31,26 @@ public class MyService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         WakefulBroadcastReceiver.completeWakefulIntent(intent);
-        scheduleAlarm();
+
+        if (!hasStarted) { // Needed or else it'll keep scheduling new alarms and you'll be swarmed with notifications
+            System.out.println("Setting alarm");
+            scheduleAlarm();
+            hasStarted = true;
+        }
 
         // Do the task here
-        Prisoner prisoner = generatePrisonerSprite();
-        showNotification(prisoner);
+        if (lastCreatedPrisoner + 60000L < System.currentTimeMillis()) {
+            System.out.println("lastCreated: " + lastCreatedPrisoner);
+            System.out.println("currentTime: " + System.currentTimeMillis());
+            lastCreatedPrisoner = System.currentTimeMillis();
+            Prisoner prisoner = generatePrisonerSprite();
+            showNotification(prisoner);
+        }
     }
 
     public Prisoner generatePrisonerSprite(){
         Prisoner prisoner = PrisonerBuilder.createPrisoner();
-        System.out.println(prisoner.getBeard());
-        System.out.println(prisoner.getSkintone());
-        System.out.println(prisoner.getHairStyle());
-        System.out.println(prisoner.getBeard());
+        System.out.println("CALLED A NEW PRISONER");
         return prisoner;
     }
 
@@ -76,8 +85,8 @@ public class MyService extends IntentService {
     private void scheduleAlarm() {
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
         Intent i = new Intent(this, MyService.class);
-        PendingIntent pi = PendingIntent.getService(this, MyAlarmReceiver.REQUEST_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000L, pi);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000L, pi);
     }
 
     public void cancelAlarm() {
