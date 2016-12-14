@@ -1,4 +1,6 @@
-package nyc.c4q.jonathancolon.catchemall;
+package nyc.c4q.jonathancolon.catchemall.prisoner;
+
+import nyc.c4q.jonathancolon.catchemall.R;
 
 /**
  * Created by jonathancolon on 12/12/16.

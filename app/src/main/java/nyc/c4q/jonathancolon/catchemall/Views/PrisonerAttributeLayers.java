@@ -1,44 +1,47 @@
-package nyc.c4q.jonathancolon.catchemall;
+package nyc.c4q.jonathancolon.catchemall.Views;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.app.Activity;
+import android.content.Context;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import nyc.c4q.jonathancolon.catchemall.R;
+import nyc.c4q.jonathancolon.catchemall.prisoner.Prisoner;
+import nyc.c4q.jonathancolon.catchemall.prisoner.PrisonerAttributes;
+import nyc.c4q.jonathancolon.catchemall.prisoner.PrisonerBuilder;
 
 import static android.view.View.GONE;
 
-public class PrisonCell extends AppCompatActivity {
+/**
+ * Created by jonathancolon on 12/14/16.
+ */
+//Controls the generation of Prisoner View Layers from anywhere in the app
+public class PrisonerAttributeLayers {
     private ImageView eyeColorLayer;
     private ImageView skinToneLayer;
     private ImageView hairStyleLayer;
     private ImageView accessoryLayer;
     private ImageView beardLayer;
-    public Button createPrisonerButton;
 
+    Context context;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prison_cell);
-        eyeColorLayer = (ImageView) findViewById(R.id.eyes);
-        skinToneLayer = (ImageView) findViewById(R.id.skintone);
-        hairStyleLayer = (ImageView) findViewById(R.id.hair);
-        beardLayer = (ImageView) findViewById(R.id.beard);
-        accessoryLayer = (ImageView) findViewById(R.id.accessory);
-
-        createPrisonerButton = (Button) findViewById(R.id.prisoner_button);
-
-        createPrisonerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                generatePrisonerSprite();
-            }
-        });
-
+    public PrisonerAttributeLayers(Context context) {
+        this.context = context;
     }
 
-    public void generatePrisonerSprite(){
+    public void Update() {
+        TextView txtView = (TextView) ((Activity) context).findViewById(R.id.text);
+        txtView.setText("Hello");
+    }
+
+    public void generatePrisonerSprite() {
+        eyeColorLayer = (ImageView) ((Activity) context).findViewById(R.id.eyes);
+        skinToneLayer = (ImageView) ((Activity) context).findViewById(R.id.skintone);
+        hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
+        beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
+        accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
+
+
         Prisoner prisoner = PrisonerBuilder.createPrisoner();
         setEyeLayer(prisoner.getEyeColor());
         setSkintoneLayer(prisoner.getSkintone());
@@ -46,36 +49,39 @@ public class PrisonCell extends AppCompatActivity {
         setBeardLayer(prisoner.getBeard());
     }
 
-    private void setBeardLayer(int beard) {
-        if (beard == 1){
+    public void setBeardLayer(int beard) {
+        if (beard == 1) {
             beardLayer.setImageResource(PrisonerAttributes.BLACK_BEARD);
         }
-        if (beard == 2){
+        if (beard == 2) {
             beardLayer.setImageResource(PrisonerAttributes.BROWN_BEARD);
         }
-        if (beard == 3){
+        if (beard == 3) {
             beardLayer.setImageResource(PrisonerAttributes.GREY_BEARD);
         } else {
             beardLayer.setVisibility(GONE);
         }
     }
 
-    private void setAccessoryLayer(boolean hasGlasses) {
+    public void setAccessoryLayer(boolean hasGlasses) {
         if (hasGlasses == true) accessoryLayer.setImageResource(PrisonerAttributes.GREY_GLASSES);
     }
 
-    private void setEyeLayer(int eyeColor){
+    public void setEyeLayer(int eyeColor) {
 
-        switch (eyeColor){
-            case 1 : eyeColorLayer.setImageResource(PrisonerAttributes.BLUE);
+        switch (eyeColor) {
+            case 1:
+                eyeColorLayer.setImageResource(PrisonerAttributes.BLUE);
                 break;
-            case 2 : eyeColorLayer.setImageResource(PrisonerAttributes.BROWN);
+            case 2:
+                eyeColorLayer.setImageResource(PrisonerAttributes.BROWN);
                 break;
-            case 3 : eyeColorLayer.setImageResource(PrisonerAttributes.GREEN);
+            case 3:
+                eyeColorLayer.setImageResource(PrisonerAttributes.GREEN);
         }
     }
 
-    private void setSkintoneLayer(int skintone) {
+    public void setSkintoneLayer(int skintone) {
 
         switch (skintone) {
             case 1:
@@ -95,7 +101,7 @@ public class PrisonCell extends AppCompatActivity {
         }
     }
 
-    private void setHairLayer(int hairStyle) {
+    public void setHairLayer(int hairStyle) {
 
         switch (hairStyle) {
             case 1:
@@ -208,10 +214,5 @@ public class PrisonCell extends AppCompatActivity {
                 break;
         }
     }
-
-
-
-
-
 
 }

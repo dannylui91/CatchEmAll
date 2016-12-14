@@ -1,13 +1,15 @@
-package nyc.c4q.jonathancolon.catchemall;
+package nyc.c4q.jonathancolon.catchemall.prisoner;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by jonathancolon on 12/12/16.
  */
 
-public class Prisoner {
+public class Prisoner implements Serializable {
 
+    private String name;
     private int eyeColor;
     private int skintone;
     private int hairStyle;
@@ -15,7 +17,8 @@ public class Prisoner {
     private boolean hasGlasses;
     private Date lastInspected;
 
-    public Prisoner(int eyeColor, int skintone, int hairStyle, boolean hasBeard, boolean hasGlasses) {
+    public Prisoner(String name, int eyeColor, int skintone, int hairStyle, boolean hasBeard, boolean hasGlasses) {
+        this.name = name;
         this.eyeColor = eyeColor;
         this.skintone = skintone;
         this.hairStyle = hairStyle;
@@ -23,7 +26,19 @@ public class Prisoner {
         this.hasGlasses = hasGlasses;
     }
 
+    public Prisoner(String name){
+        this.name = name;
+    }
+
     public Prisoner() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getEyeColor() {
