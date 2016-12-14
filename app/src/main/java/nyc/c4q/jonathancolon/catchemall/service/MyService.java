@@ -13,6 +13,8 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 
 import nyc.c4q.jonathancolon.catchemall.R;
 import nyc.c4q.jonathancolon.catchemall.SecondActivity;
+import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
+import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerBuilder;
 
 /**
  * Created by Danny on 12/13/2016.
@@ -30,15 +32,25 @@ public class MyService extends IntentService {
         scheduleAlarm();
 
         // Do the task here
-        System.out.println(Calendar.getInstance().getTimeInMillis() + ":  Hi");
-        showNotification();
+        Prisoner prisoner = generatePrisonerSprite();
+        showNotification(prisoner);
     }
 
-    public void showNotification() {
+    public Prisoner generatePrisonerSprite(){
+        Prisoner prisoner = PrisonerBuilder.createPrisoner();
+        System.out.println(prisoner.getBeard());
+        System.out.println(prisoner.getSkintone());
+        System.out.println(prisoner.getHairStyle());
+        System.out.println(prisoner.getBeard());
+        return prisoner;
+    }
+
+    public void showNotification(Prisoner prisoner) {
         int NOTIFICATION_ID = 555;
 
         // Define an intent to trigger when notification is selected (in this case to open an activity)
         Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra("PRISONER_KEY", prisoner);
 
         // Turn this into a PendingIntent
         int requestID = (int) System.currentTimeMillis(); // Unique requestID to differentiate between various notification with same notification ID

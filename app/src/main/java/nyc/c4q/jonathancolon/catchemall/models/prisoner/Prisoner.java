@@ -1,12 +1,13 @@
 package nyc.c4q.jonathancolon.catchemall.models.prisoner;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by jonathancolon on 12/12/16.
  */
 
-public class Prisoner {
+public class Prisoner implements Serializable {
 
     private int eyeColor;
     private int skintone;
