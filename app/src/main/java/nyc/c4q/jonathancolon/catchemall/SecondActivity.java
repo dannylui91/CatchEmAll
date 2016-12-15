@@ -1,6 +1,7 @@
 package nyc.c4q.jonathancolon.catchemall;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,8 +11,10 @@ import android.widget.ImageView;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerAttributes;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
+import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 
 import static android.view.View.GONE;
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class SecondActivity extends AppCompatActivity {
     public static final String PRISONER_KEY = "prisoner_key";
@@ -21,6 +24,8 @@ public class SecondActivity extends AppCompatActivity {
     private ImageView accessoryLayer;
     private ImageView beardLayer;
     private Button createPrisonerButton;
+
+    private static SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,10 @@ public class SecondActivity extends AppCompatActivity {
         createPrisonerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //call main activity
                 MainActivity.onPrisonerCapture(prisoner);
+                PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(SecondActivity.this);
+                db = dbHelper.getWritableDatabase();
+                cupboard().withDatabase(db).put(prisoner);
                 Intent intent = new Intent(SecondActivity.this, MainActivity.class);
                 startActivity(intent);
             }
