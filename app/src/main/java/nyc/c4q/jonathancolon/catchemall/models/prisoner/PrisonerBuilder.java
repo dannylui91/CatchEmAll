@@ -23,7 +23,8 @@ public class PrisonerBuilder {
         prisoner.setEyeColor(randomEyeColor());
         prisoner.setHairStyle(randomHairColor());
         prisoner.setBeard(randomBeard());
-        prisoner.setLastInspected(calendar.getTime());
+        //prisoner.setLastInspected(calendar.getTime());
+        prisoner.setLastInspected(System.currentTimeMillis());
 
         return prisoner;
     }

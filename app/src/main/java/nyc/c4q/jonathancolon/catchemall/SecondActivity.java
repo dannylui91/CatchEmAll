@@ -3,6 +3,7 @@ package nyc.c4q.jonathancolon.catchemall;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -13,12 +14,13 @@ import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 import static android.view.View.GONE;
 
 public class SecondActivity extends AppCompatActivity {
+    public static final String PRISONER_KEY = "prisoner_key";
     private ImageView eyeColorLayer;
     private ImageView skinToneLayer;
     private ImageView hairStyleLayer;
     private ImageView accessoryLayer;
     private ImageView beardLayer;
-    public Button createPrisonerButton;
+    private Button createPrisonerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +30,19 @@ public class SecondActivity extends AppCompatActivity {
         initViews();
 
         Intent intent = getIntent();
-        Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable("PRISONER_KEY");
+        final Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
 
         displayPrisoner(prisoner);
+
+        createPrisonerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call main activity
+                MainActivity.onPrisonerCapture(prisoner);
+                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initViews() {
@@ -39,6 +51,7 @@ public class SecondActivity extends AppCompatActivity {
         hairStyleLayer = (ImageView) findViewById(R.id.hair);
         beardLayer = (ImageView) findViewById(R.id.beard);
         accessoryLayer = (ImageView) findViewById(R.id.accessory);
+        createPrisonerButton = (Button) findViewById(R.id.prisoner_button);
     }
 
     private void displayPrisoner(Prisoner prisoner) {
@@ -58,5 +71,4 @@ public class SecondActivity extends AppCompatActivity {
         if (hasGlasses == true)
             accessoryLayer.setImageResource(PrisonerAttributes.GREY_GLASSES);
     }
-
 }

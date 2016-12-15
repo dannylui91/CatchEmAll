@@ -7,19 +7,25 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.widget.Toast;
 
 import nyc.c4q.jonathancolon.catchemall.R;
 import nyc.c4q.jonathancolon.catchemall.SecondActivity;
+import nyc.c4q.jonathancolon.catchemall.UinamesModel;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerBuilder;
+import nyc.c4q.jonathancolon.catchemall.networks.UinamesClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Danny on 12/13/2016.
  */
 public class MyService extends IntentService {
+    private UinamesClient client;
     public static boolean hasStarted = false;
     private static Long lastCreatedPrisoner = System.currentTimeMillis();
 
@@ -32,6 +38,8 @@ public class MyService extends IntentService {
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         WakefulBroadcastReceiver.completeWakefulIntent(intent);
 
+        System.out.println("SERVICE CALLED");
+
         if (!hasStarted) { // Needed or else it'll keep scheduling new alarms and you'll be swarmed with notifications
             System.out.println("Setting alarm");
             scheduleAlarm();
@@ -43,10 +51,32 @@ public class MyService extends IntentService {
             System.out.println("lastCreated: " + lastCreatedPrisoner);
             System.out.println("currentTime: " + System.currentTimeMillis());
             lastCreatedPrisoner = System.currentTimeMillis();
-            Prisoner prisoner = generatePrisonerSprite();
-            showNotification(prisoner);
+
+            client = UinamesClient.getInstance();
+            Call<UinamesModel> call = client.getRandomName();
+            call.enqueue(new Callback<UinamesModel>() {
+                @Override
+                public void onResponse(Call<UinamesModel> call, Response<UinamesModel> response) {
+                    UinamesModel model = response.body();
+                    String firstName = model.getName();
+                    String lastName = model.getSurname();
+                    Prisoner prisoner = generatePrisonerSprite();
+                    prisoner.setFirstName(firstName);
+                    prisoner.setLastName(lastName);
+                    showNotification(prisoner);
+                }
+
+                @Override
+                public void onFailure(Call<UinamesModel> call, Throwable t) {
+                    Toast.makeText(MyService.this, "Failed to retrieve name data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
         }
     }
+
 
     public Prisoner generatePrisonerSprite(){
         Prisoner prisoner = PrisonerBuilder.createPrisoner();
@@ -59,7 +89,7 @@ public class MyService extends IntentService {
 
         // Define an intent to trigger when notification is selected (in this case to open an activity)
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra("PRISONER_KEY", prisoner);
+        intent.putExtra(SecondActivity.PRISONER_KEY, prisoner);
 
         // Turn this into a PendingIntent
         int requestID = (int) System.currentTimeMillis(); // Unique requestID to differentiate between various notification with same notification ID
@@ -69,8 +99,8 @@ public class MyService extends IntentService {
         // Attach the pendingIntent to a new notification using setContentIntent
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("My notification")
-                .setContentText(Calendar.getInstance().getTimeInMillis() + "")
+                .setContentTitle("Spotted an Escapee!")
+                .setContentText(prisoner.getFirstName() + " " + prisoner.getLastName())
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true) // Hides the notification after its been selected
                 .build();

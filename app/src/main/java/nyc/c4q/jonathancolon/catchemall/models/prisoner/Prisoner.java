@@ -1,34 +1,61 @@
 package nyc.c4q.jonathancolon.catchemall.models.prisoner;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by jonathancolon on 12/12/16.
  */
 
 public class Prisoner implements Serializable {
-
+    private Long _id;
+    private String firstName;
+    private String lastName;
     private int eyeColor;
     private int skintone;
     private int hairStyle;
     private int beard;
+    private boolean hasBeard;
     private boolean hasGlasses;
-    private Date lastInspected;
+    private Long lastInspected;
 
-    public Prisoner(int eyeColor, int skintone, int hairStyle, boolean hasBeard, boolean hasGlasses) {
-        this.eyeColor = eyeColor;
-        this.skintone = skintone;
-        this.hairStyle = hairStyle;
-
-        this.hasGlasses = hasGlasses;
-    }
-
-    public Prisoner() {
+    public Prisoner() { // Default empty constructor needed for Sqlite
+        this.firstName = "noname";
+        this.lastName = "noname";
         this.eyeColor = -1;
         this.skintone = -1;
         this.hairStyle = -1;
         this.beard = -1;
+        this.hasBeard = false;
+        this.hasGlasses = false;
+        this.lastInspected = System.currentTimeMillis();
+
+    }
+
+    public Prisoner(String firstName, String lastName, int eyeColor, int skintone, int hairStyle, boolean hasBeard, boolean hasGlasses, Long lastInspected) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.eyeColor = eyeColor;
+        this.skintone = skintone;
+        this.hairStyle = hairStyle;
+        this.hasBeard = hasBeard;
+        this.hasGlasses = hasGlasses;
+        this.lastInspected = lastInspected;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getEyeColor() {
@@ -63,11 +90,11 @@ public class Prisoner implements Serializable {
         this.beard = beard;
     }
 
-    public Date getLastInspected() {
+    public Long getLastInspected() {
         return lastInspected;
     }
 
-    public void setLastInspected(Date lastInspected) {
+    public void setLastInspected(Long lastInspected) {
         this.lastInspected = lastInspected;
     }
 }
