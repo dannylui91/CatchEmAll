@@ -1,126 +1,225 @@
 package nyc.c4q.jonathancolon.catchemall.models.prisoner;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.ImageView;
+
+import nyc.c4q.jonathancolon.catchemall.R;
+
+import static android.view.View.GONE;
+
 /**
  * Created by Danny on 12/14/2016.
  */
 
 public class PrisonerHelper {
 
-    public static int getEyeLayer(int eyeColor){
+    private ImageView eyeColorLayer;
+    private ImageView skinToneLayer;
+    private ImageView hairStyleLayer;
+    private ImageView accessoryLayer;
+    private ImageView beardLayer;
 
-        switch (eyeColor){
-            case 1 :
-                return PrisonerAttributes.BLUE;
-            case 2 :
-                return PrisonerAttributes.BROWN;
-            default:
-                return PrisonerAttributes.GREEN;
+    Context context;
+
+    public PrisonerHelper(Context context) {
+        this.context = context;
+    }
+
+
+    public void updatePrisonerSpriteView(Prisoner prisoner) {
+        eyeColorLayer = (ImageView) ((Activity) context).findViewById(R.id.eyes);
+        skinToneLayer = (ImageView) ((Activity) context).findViewById(R.id.skintone);
+        hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
+        beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
+        accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
+
+
+        prisoner = PrisonerBuilder.createPrisoner();
+        setEyeLayer(prisoner.getEyeColor());
+        setSkintoneLayer(prisoner.getSkintone());
+        setHairLayer(prisoner.getHairStyle());
+        setBeardLayer(prisoner.getBeard());
+    }
+
+    public void generateNewPrisonerSprite() {
+        eyeColorLayer = (ImageView) ((Activity) context).findViewById(R.id.eyes);
+        skinToneLayer = (ImageView) ((Activity) context).findViewById(R.id.skintone);
+        hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
+        beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
+        accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
+
+
+        Prisoner prisoner = PrisonerBuilder.createPrisoner();
+        setEyeLayer(prisoner.getEyeColor());
+        setSkintoneLayer(prisoner.getSkintone());
+        setHairLayer(prisoner.getHairStyle());
+        setBeardLayer(prisoner.getBeard());
+    }
+
+    public void setBeardLayer(int beard) {
+        if (beard == 1) {
+            beardLayer.setImageResource(PrisonerAttributes.BLACK_BEARD);
+        }
+        if (beard == 2) {
+            beardLayer.setImageResource(PrisonerAttributes.BROWN_BEARD);
+        }
+        if (beard == 3) {
+            beardLayer.setImageResource(PrisonerAttributes.GREY_BEARD);
+        } else {
+            beardLayer.setVisibility(GONE);
         }
     }
 
-    public static int getSkintoneLayer(int skintone) {
+    public void setAccessoryLayer(boolean hasGlasses) {
+        if (hasGlasses == true) accessoryLayer.setImageResource(PrisonerAttributes.GREY_GLASSES);
+    }
+
+    public void setEyeLayer(int eyeColor) {
+
+        switch (eyeColor) {
+            case 1:
+                eyeColorLayer.setImageResource(PrisonerAttributes.BLUE);
+                break;
+            case 2:
+                eyeColorLayer.setImageResource(PrisonerAttributes.BROWN);
+                break;
+            case 3:
+                eyeColorLayer.setImageResource(PrisonerAttributes.GREEN);
+        }
+    }
+
+    public void setSkintoneLayer(int skintone) {
+
         switch (skintone) {
             case 1:
-                return PrisonerAttributes.LIGHTEST;
+                skinToneLayer.setImageResource(PrisonerAttributes.LIGHTEST);
+                break;
             case 2:
-                return PrisonerAttributes.LIGHTER;
+                skinToneLayer.setImageResource(PrisonerAttributes.LIGHTER);
+                break;
             case 3:
-                return PrisonerAttributes.LIGHT;
+                skinToneLayer.setImageResource(PrisonerAttributes.LIGHT);
+                break;
             case 4:
-                return PrisonerAttributes.TAN;
-            default:
-                return PrisonerAttributes.DARK;
+                skinToneLayer.setImageResource(PrisonerAttributes.TAN);
+                break;
+            case 5:
+                skinToneLayer.setImageResource(PrisonerAttributes.DARK);
         }
     }
 
-    public static int getBeardLayer(int beard) {
-        switch(beard) {
-            case 1:
-                return PrisonerAttributes.BLACK_BEARD;
-            case 2:
-                return PrisonerAttributes.BROWN_BEARD;
-            case 3:
-                return PrisonerAttributes.GREY_BEARD;
-            default:
-                return -1;
-        }
-    }
-
-    public static int getHairLayer(int hairStyle) {
+    public void setHairLayer(int hairStyle) {
 
         switch (hairStyle) {
             case 1:
-                return PrisonerAttributes.BALD_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.BALD_BLACK);
+                break;
             case 2:
-                return PrisonerAttributes.BALD_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.BALD_BLONDE);
+                break;
             case 3:
-                return PrisonerAttributes.BALD_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.BALD_BROWN);
+                break;
             case 4:
-                return PrisonerAttributes.BALD_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.BALD_GREY);
+                break;
             case 5:
-                return PrisonerAttributes.PONYTAIL_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PONYTAIL_BLACK);
+                break;
             case 6:
-                return PrisonerAttributes.PONYTAIL_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PONYTAIL_BLONDE);
+                break;
             case 7:
-                return PrisonerAttributes.PONYTAIL_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PONYTAIL_BROWN);
+                break;
             case 8:
-                return PrisonerAttributes.PONYTAIL_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PONYTAIL_GREY);
+                break;
             case 9:
-                return PrisonerAttributes.COMBOVER_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.COMBOVER_BLACK);
+                break;
             case 10:
-                return PrisonerAttributes.COMBOVER_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.COMBOVER_BLONDE);
+                break;
             case 11:
-                return PrisonerAttributes.COMBOVER_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.COMBOVER_BROWN);
+                break;
             case 12:
-                return PrisonerAttributes.COMBOVER_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.COMBOVER_GREY);
+                break;
             case 13:
-                return PrisonerAttributes.CREW_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.CREW_BLACK);
+                break;
             case 14:
-                return PrisonerAttributes.CREW_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.CREW_BLONDE);
+                break;
             case 15:
-                return PrisonerAttributes.CREW_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.CREW_BROWN);
+                break;
             case 16:
-                return PrisonerAttributes.CREW_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.CREW_GREY);
+                break;
             case 17:
-                return PrisonerAttributes.MANBUN_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.MANBUN_BLACK);
+                break;
             case 18:
-                return PrisonerAttributes.MANBUN_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.MANBUN_BLONDE);
+                break;
             case 19:
-                return PrisonerAttributes.MANBUN_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.MANBUN_BROWN);
+                break;
             case 20:
-                return PrisonerAttributes.MANBUN_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.MANBUN_GREY);
+                break;
             case 21:
-                return PrisonerAttributes.PULLED_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PULLED_BLACK);
+                break;
             case 22:
-                return PrisonerAttributes.PULLED_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PULLED_BLONDE);
+                break;
             case 23:
-                return PrisonerAttributes.PULLED_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PULLED_BROWN);
+                break;
             case 24:
-                return PrisonerAttributes.PULLED_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.PULLED_GREY);
+                break;
             case 25:
-                return PrisonerAttributes.SLICKED_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SLICKED_BLACK);
+                break;
             case 26:
-                return PrisonerAttributes.SLICKED_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SLICKED_BLONDE);
+                break;
             case 27:
-                return PrisonerAttributes.SLICKED_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SLICKED_BROWN);
+                break;
             case 28:
-                return PrisonerAttributes.SLICKED_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SLICKED_GREY);
+                break;
             case 29:
-                return PrisonerAttributes.SPIKEY_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SPIKEY_BLACK);
+                break;
             case 30:
-                return PrisonerAttributes.SPIKEY_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SPIKEY_BLONDE);
+                break;
             case 31:
-                return PrisonerAttributes.SPIKEY_BROWN;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SPIKEY_BROWN);
+                break;
             case 32:
-                return PrisonerAttributes.SPIKEY_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.SPIKEY_GREY);
+                break;
             case 33:
-                return PrisonerAttributes.FRO_BLACK;
+                hairStyleLayer.setImageResource(PrisonerAttributes.FRO_BLACK);
+                break;
             case 34:
-                return PrisonerAttributes.FRO_BLONDE;
+                hairStyleLayer.setImageResource(PrisonerAttributes.FRO_BLONDE);
+                break;
             case 35:
-                return PrisonerAttributes.FRO_BROWN;
-            default:
-                return PrisonerAttributes.FRO_GREY;
+                hairStyleLayer.setImageResource(PrisonerAttributes.FRO_BROWN);
+                break;
+            case 36:
+                hairStyleLayer.setImageResource(PrisonerAttributes.FRO_GREY);
+                break;
         }
     }
 }
