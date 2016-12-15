@@ -2,6 +2,7 @@ package nyc.c4q.jonathancolon.catchemall.prisoner;
 
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
@@ -19,14 +20,12 @@ public class PrisonerBuilder {
 
 
     public static Prisoner createPrisoner(){
-        Calendar calendar = new GregorianCalendar();
-
         Prisoner prisoner = new Prisoner();
         prisoner.setSkintone(randomSkinTone());
         prisoner.setEyeColor(randomEyeColor());
         prisoner.setHairStyle(randomHairColor());
         prisoner.setBeard(randomBeard());
-        prisoner.setLastInspected(calendar.getTime());
+        prisoner.setLastInspected(prisoner.getLastInspected());
 
         return prisoner;
     }
@@ -50,6 +49,12 @@ public class PrisonerBuilder {
     private static int randomBeard(){
         int beard = random.nextInt(BEARD_RANGE);
         return beard;
+    }
+
+    private static Date currentCalenderDate(){
+        Calendar calendar = new GregorianCalendar();
+        Date currentDate = calendar.getTime();
+        return currentDate;
     }
 
 }

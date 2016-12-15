@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import nyc.c4q.jonathancolon.catchemall.R;
-import nyc.c4q.jonathancolon.catchemall.Views.PrisonerAttributeLayers;
+import nyc.c4q.jonathancolon.catchemall.views.PrisonerAttributeLayers;
 
 public class PrisonCell extends Activity {
     public Button createPrisonerButton;
@@ -24,7 +24,7 @@ public class PrisonCell extends Activity {
         createPrisonerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prisonerViews.generatePrisonerSprite();
+                prisonerViews.generateNewPrisonerSprite();
             }
         });
 

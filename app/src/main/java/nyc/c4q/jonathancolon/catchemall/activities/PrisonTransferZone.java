@@ -13,5 +13,5 @@ public class PrisonTransferZone extends AppCompatActivity {
         setContentView(R.layout.activity_prison_transfer_zone);
     }
 
-    PrisonCell prisonCell = new PrisonCell();
+
 }

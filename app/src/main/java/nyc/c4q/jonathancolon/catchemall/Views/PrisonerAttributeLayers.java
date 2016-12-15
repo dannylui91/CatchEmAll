@@ -1,9 +1,8 @@
-package nyc.c4q.jonathancolon.catchemall.Views;
+package nyc.c4q.jonathancolon.catchemall.views;
 
 import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import nyc.c4q.jonathancolon.catchemall.R;
 import nyc.c4q.jonathancolon.catchemall.prisoner.Prisoner;
@@ -29,12 +28,23 @@ public class PrisonerAttributeLayers {
         this.context = context;
     }
 
-    public void Update() {
-        TextView txtView = (TextView) ((Activity) context).findViewById(R.id.text);
-        txtView.setText("Hello");
+
+    public void updatePrisonerSpriteView(Prisoner prisoner) {
+        eyeColorLayer = (ImageView) ((Activity) context).findViewById(R.id.eyes);
+        skinToneLayer = (ImageView) ((Activity) context).findViewById(R.id.skintone);
+        hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
+        beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
+        accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
+
+
+        prisoner = PrisonerBuilder.createPrisoner();
+        setEyeLayer(prisoner.getEyeColor());
+        setSkintoneLayer(prisoner.getSkintone());
+        setHairLayer(prisoner.getHairStyle());
+        setBeardLayer(prisoner.getBeard());
     }
 
-    public void generatePrisonerSprite() {
+    public void generateNewPrisonerSprite() {
         eyeColorLayer = (ImageView) ((Activity) context).findViewById(R.id.eyes);
         skinToneLayer = (ImageView) ((Activity) context).findViewById(R.id.skintone);
         hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
