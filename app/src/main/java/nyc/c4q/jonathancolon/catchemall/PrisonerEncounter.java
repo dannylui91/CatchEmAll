@@ -3,6 +3,7 @@ package nyc.c4q.jonathancolon.catchemall;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class PrisonerEncounter extends AppCompatActivity {
     private ImageView accessoryLayer;
     private ImageView beardLayer;
     private Button createPrisonerButton;
-
+    private FloatingActionButton capturePrisonerButton;
     private static SQLiteDatabase db;
     private TextView nameLayer;
 
@@ -42,7 +43,7 @@ public class PrisonerEncounter extends AppCompatActivity {
         nameLayer.setText(prisoner.getFirstName() + " " + prisoner.getLastName());
 
 
-        createPrisonerButton.setOnClickListener(new View.OnClickListener() {
+        capturePrisonerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CellBlock.onPrisonerCapture(prisoner);
@@ -58,6 +59,7 @@ public class PrisonerEncounter extends AppCompatActivity {
     private void initViews() {
         createPrisonerButton = (Button) findViewById(R.id.prisoner_button);
         nameLayer = (TextView)findViewById(R.id.prisoner_name);
+        capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
     }
 
 }
