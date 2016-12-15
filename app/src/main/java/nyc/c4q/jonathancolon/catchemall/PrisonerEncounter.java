@@ -51,7 +51,9 @@ public class PrisonerEncounter extends AppCompatActivity {
                 db = dbHelper.getWritableDatabase();
                 cupboard().withDatabase(db).put(prisoner);
                 Intent intent = new Intent(PrisonerEncounter.this, CellBlock.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
     }
