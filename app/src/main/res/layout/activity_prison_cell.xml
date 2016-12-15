@@ -74,35 +74,47 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-
-            <TextView
-                android:id="@+id/prisoner_info"
-                android:text="Unknown Prisoner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:layout_marginTop="26dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="#ffffff"
-                android:background="#000000"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
-
-            <Button
-                android:id="@+id/inspect_lock_button"
-                android:text="Inspect Lock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="49dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true" />
-
-        </RelativeLayout>
         <!--  Place the objects you want on the top here -->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/prisoner_info"
+            android:text="Unknown Prisoner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:background="#000000"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buttonLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_inspect_lock"
+
+            android:src="@android:drawable/ic_lock_idle_lock"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="25dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="40dp" />
+
 
     </RelativeLayout>
 </FrameLayout>
