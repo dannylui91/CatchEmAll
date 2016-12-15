@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import nyc.c4q.jonathancolon.catchemall.R;
 import nyc.c4q.jonathancolon.catchemall.SecondActivity;
-import nyc.c4q.jonathancolon.catchemall.UinamesModel;
+import nyc.c4q.jonathancolon.catchemall.models.UinamesModel;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerBuilder;
 import nyc.c4q.jonathancolon.catchemall.networks.UinamesClient;

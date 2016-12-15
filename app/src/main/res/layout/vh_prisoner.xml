@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_prison_cell"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="nyc.c4q.jonathancolon.catchemall.SecondActivity">
+
+        <RelativeLayout
+            android:id="@+id/skintone_layer"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ImageView
+                android:id="@+id/vh_skintone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/prisoner_skintone_2_300_180"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/eye_layer">
+            <ImageView
+                android:id="@+id/vh_eyes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/prisoner_eyes_brown_300_180"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <!--  Place the objects you want on the top here -->
+            <RelativeLayout
+                android:id="@+id/hair_layer"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+                <ImageView
+                    android:id="@+id/vh_hair"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/prisoner_hair_combover_black_300_180"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/beard_layer"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+                <ImageView
+                    android:id="@+id/vh_beard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+
+                <!--  Place the objects you want on the bottom here -->
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/accessory_layer"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+                <ImageView
+                    android:id="@+id/vh_accessory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/vh_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="Inmate 4543t54543"
+                android:textColor="#FFFFFFFF"
+                android:background="#FF000000"/>
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package nyc.c4q.jonathancolon.catchemall;
+package nyc.c4q.jonathancolon.catchemall.models;
 
 /**
  * Created by dannylui on 12/14/16.
