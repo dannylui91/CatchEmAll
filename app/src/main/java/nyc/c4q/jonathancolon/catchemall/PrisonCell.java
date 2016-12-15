@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 
@@ -26,14 +30,31 @@ public class PrisonCell extends AppCompatActivity {
         initViews();
         PrisonerHelper prisonerHelper = new PrisonerHelper(this);
         prisonerHelper.updatePrisonerSpriteView(prisoner);
-        nameLayer.setText(prisoner.getFirstName() + " " + prisoner.getLastName());
+        String name = (prisoner.getFirstName() + " " + prisoner.getLastName());
+
+        Date date = new Date(prisoner.getLastInspected());
+
+        DateFormat calanderDateformatter = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+
+        String imprisonDateFormatted = calanderDateformatter.format(date);
+        String timeSinceInspectionFormatted = timeFormatter.format(timeSinceInspection(prisoner));
 
 
+        nameLayer.setText(name + "\n" + imprisonDateFormatted + "\n" + timeSinceInspectionFormatted);
 
 
     }
 
     private void initViews() {
-        nameLayer = (TextView)findViewById(R.id.prisoner_name);
+        nameLayer = (TextView) findViewById(R.id.prisoner_info);
+    }
+
+    private long timeSinceInspection(Prisoner prisoner) {
+        long lastInspection = prisoner.getLastInspected();
+        long currentTime = System.currentTimeMillis();
+        long timeSinceInspection = currentTime - lastInspection;
+
+        return timeSinceInspection;
     }
 }

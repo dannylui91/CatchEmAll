@@ -13,7 +13,7 @@ public class PrisonerBuilder {
     private static final int EYE_RANGE = 3;
     private static final int HAIR_RANGE = 36;
     private static final int SKINTONE_RANGE = 5;
-    private static final int BEARD_RANGE = 10;
+    private static final int BEARD_RANGE = 6;
 
     public static Prisoner createPrisoner(){
         Calendar calendar = new GregorianCalendar();
@@ -23,6 +23,7 @@ public class PrisonerBuilder {
         prisoner.setEyeColor(randomEyeColor());
         prisoner.setHairStyle(randomHairColor());
         prisoner.setBeard(randomBeard());
+        prisoner.setHasGlasses(hasGlasses());
         //prisoner.setLastInspected(calendar.getTime());
         prisoner.setLastInspected(System.currentTimeMillis());
 
