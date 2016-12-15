@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_prison_encounter"
     android:layout_width="match_parent"
@@ -96,7 +97,20 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_capture_prisoner"
+                android:layout_gravity="bottom|end"
+                android:src="@android:drawable/ic_lock_idle_lock"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:layout_marginRight="@dimen/fab_margin"
+                android:layout_marginBottom="49dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/prisoner_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </RelativeLayout>
+
         <!--  Place the objects you want on the top here -->
 
     </RelativeLayout>
