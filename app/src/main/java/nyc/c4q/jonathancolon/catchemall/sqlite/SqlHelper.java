@@ -30,7 +30,7 @@ public class SqlHelper {
             }
             itr.close();
         } catch (Exception e) {
-            Log.e("MainActivity", "selectAllCats: ", e);
+            Log.e("CellBlock", "selectAllCats: ", e);
         }
         return prisoners;
     }

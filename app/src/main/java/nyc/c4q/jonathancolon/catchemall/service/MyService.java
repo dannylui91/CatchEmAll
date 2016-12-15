@@ -12,7 +12,7 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
 
 import nyc.c4q.jonathancolon.catchemall.R;
-import nyc.c4q.jonathancolon.catchemall.SecondActivity;
+import nyc.c4q.jonathancolon.catchemall.PrisonerEncounter;
 import nyc.c4q.jonathancolon.catchemall.models.UinamesModel;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerBuilder;
@@ -88,8 +88,8 @@ public class MyService extends IntentService {
         int NOTIFICATION_ID = 555;
 
         // Define an intent to trigger when notification is selected (in this case to open an activity)
-        Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra(SecondActivity.PRISONER_KEY, prisoner);
+        Intent intent = new Intent(this, PrisonerEncounter.class);
+        intent.putExtra(PrisonerEncounter.PRISONER_KEY, prisoner);
 
         // Turn this into a PendingIntent
         int requestID = (int) System.currentTimeMillis(); // Unique requestID to differentiate between various notification with same notification ID

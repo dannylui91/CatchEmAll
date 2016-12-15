@@ -16,8 +16,8 @@ import nyc.c4q.jonathancolon.catchemall.service.MyService;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.SqlHelper;
 
-public class MainActivity extends AppCompatActivity implements PrisonerAdapter.Listener {
-    private static final String TAG = MainActivity.class.getName();
+public class CellBlock extends AppCompatActivity implements PrisonerAdapter.Listener {
+    private static final String TAG = CellBlock.class.getName();
     private static PrisonerDatabaseHelper prisonerDatabaseHelper;
     private SQLiteDatabase db;
     private RecyclerView recyclerView;
@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity implements PrisonerAdapter.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cellblock);
 
         setupRecyclerView();
         populateRecyclerFromDb();
 
         if (!MyService.hasStarted) {
-            System.out.println("MainActivity: starting service");
+            System.out.println("CellBlock: starting service");
             startService();
         }
     }
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements PrisonerAdapter.L
     public void onPrisonerClicked(Prisoner prisoner) {
         System.out.println("Clicked prisoner: " + prisoner.getFirstName() + " " + prisoner.getLastName());
         //logic after clicking one of the prisoners
-        Intent intent = new Intent(this, ThirdActivity.class);
-        intent.putExtra(ThirdActivity.PRISONER_KEY, prisoner);
+        Intent intent = new Intent(this, PrisonCell.class);
+        intent.putExtra(PrisonCell.PRISONER_KEY, prisoner);
         startActivity(intent);
     }
 }

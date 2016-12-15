@@ -5,10 +5,10 @@
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_prison_cell"
+        android:id="@+id/vh_prison_cell"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="nyc.c4q.jonathancolon.catchemall.SecondActivity">
+        tools:context="nyc.c4q.jonathancolon.catchemall.PrisonerEncounter">
 
         <RelativeLayout
             android:id="@+id/skintone_layer"

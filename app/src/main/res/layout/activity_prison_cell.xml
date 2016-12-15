@@ -4,7 +4,7 @@
     android:id="@+id/activity_prison_cell"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nyc.c4q.jonathancolon.catchemall.SecondActivity">
+    tools:context="nyc.c4q.jonathancolon.catchemall.PrisonerEncounter">
 
     <!--  Place the objects you want on the bottom here -->
     <RelativeLayout
@@ -72,14 +72,6 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent">
 
-            <Button
-                android:id="@+id/prisoner_button"
-                android:text="Capture Prisoner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -95,6 +87,15 @@
                 android:layout_marginTop="26dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/inspect_lock_button"
+                android:text="Inspect Lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="49dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
         <!--  Place the objects you want on the top here -->

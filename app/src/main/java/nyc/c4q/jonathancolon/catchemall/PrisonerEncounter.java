@@ -15,7 +15,7 @@ import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
-public class SecondActivity extends AppCompatActivity {
+public class PrisonerEncounter extends AppCompatActivity {
     public static final String PRISONER_KEY = "prisoner_key";
     private ImageView eyeColorLayer;
     private ImageView skinToneLayer;
@@ -30,7 +30,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_prisoner_encounter);
 
         initViews();
 
@@ -45,11 +45,11 @@ public class SecondActivity extends AppCompatActivity {
         createPrisonerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.onPrisonerCapture(prisoner);
-                PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(SecondActivity.this);
+                CellBlock.onPrisonerCapture(prisoner);
+                PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(PrisonerEncounter.this);
                 db = dbHelper.getWritableDatabase();
                 cupboard().withDatabase(db).put(prisoner);
-                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                Intent intent = new Intent(PrisonerEncounter.this, CellBlock.class);
                 startActivity(intent);
             }
         });
