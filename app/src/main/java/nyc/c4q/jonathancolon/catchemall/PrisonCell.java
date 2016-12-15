@@ -3,6 +3,7 @@ package nyc.c4q.jonathancolon.catchemall;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class PrisonCell extends AppCompatActivity {
     public static final String PRISONER_KEY = "prisoner_key_third_activity";
     private TextView nameLayer;
     private Button lockBtn;
+    private FloatingActionButton inspectLockBtn;
 
     private SQLiteDatabase db;
 
@@ -30,13 +32,13 @@ public class PrisonCell extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prison_cell);
         nameLayer = (TextView) findViewById(R.id.prisoner_info);
-        lockBtn = (Button) findViewById(R.id.inspect_lock_button);
+        inspectLockBtn = (FloatingActionButton) findViewById(R.id.fab_inspect_lock);
 
         Intent intent = getIntent();
         Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
 
         setViews(prisoner);
-        lockBtn.setOnClickListener(onClickInspectLock(prisoner));
+        inspectLockBtn.setOnClickListener(onClickInspectLock(prisoner));
     }
 
     private View.OnClickListener onClickInspectLock(final Prisoner prisoner) {
