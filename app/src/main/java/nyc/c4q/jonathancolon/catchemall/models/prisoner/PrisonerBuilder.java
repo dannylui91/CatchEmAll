@@ -49,4 +49,9 @@ public class PrisonerBuilder {
         int beard = random.nextInt(BEARD_RANGE);
         return beard;
     }
+
+    private static boolean hasGlasses(){
+        boolean hasGlasses = random.nextBoolean();
+        return hasGlasses;
+    }
 }

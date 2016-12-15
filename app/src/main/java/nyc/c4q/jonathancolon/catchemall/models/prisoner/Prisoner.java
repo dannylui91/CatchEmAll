@@ -98,5 +98,11 @@ public class Prisoner implements Serializable {
         this.lastInspected = lastInspected;
     }
 
+    public boolean getHasGlasses() {
+        return hasGlasses;
+    }
 
+    public void setHasGlasses(boolean hasGlasses) {
+        this.hasGlasses = hasGlasses;
+    }
 }

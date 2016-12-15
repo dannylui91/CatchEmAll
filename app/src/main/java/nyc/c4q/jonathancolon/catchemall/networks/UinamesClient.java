@@ -1,6 +1,6 @@
 package nyc.c4q.jonathancolon.catchemall.networks;
 
-import nyc.c4q.jonathancolon.catchemall.UinamesModel;
+import nyc.c4q.jonathancolon.catchemall.models.UinamesModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

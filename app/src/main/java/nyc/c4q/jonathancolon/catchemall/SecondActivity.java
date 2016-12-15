@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
-import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerAttributes;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 
@@ -61,10 +60,4 @@ public class SecondActivity extends AppCompatActivity {
         nameLayer = (TextView)findViewById(R.id.prisoner_name);
     }
 
-
-    //unused, could be added to PrisonerHelper
-    private void setAccessoryLayer(boolean hasGlasses) {
-        if (hasGlasses == true)
-            accessoryLayer.setImageResource(PrisonerAttributes.GREY_GLASSES);
-    }
 }

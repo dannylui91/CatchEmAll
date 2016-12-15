@@ -2,6 +2,7 @@ package nyc.c4q.jonathancolon.catchemall.models.prisoner;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,14 +30,13 @@ public class PrisonerHelper {
     }
 
 
+
     public void updatePrisonerSpriteView(Prisoner prisoner) {
         eyeColorLayer = (ImageView) ((Activity) context).findViewById(R.id.eyes);
         skinToneLayer = (ImageView) ((Activity) context).findViewById(R.id.skintone);
         hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
         beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
         accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
-        nameLayer = (TextView) ((Activity) context).findViewById(R.id.prisoner_name);
-
 
         prisoner = PrisonerBuilder.createPrisoner();
         setNameLayer(prisoner);
@@ -47,6 +47,21 @@ public class PrisonerHelper {
     }
 
     private void setNameLayer(Prisoner prisoner) {
+    }
+
+    public void generateViewHolderPrisonerSprite(Prisoner prisoner, View itemView) {
+        eyeColorLayer = (ImageView) itemView.findViewById(R.id.vh_eyes);
+        skinToneLayer = (ImageView) itemView.findViewById(R.id.vh_skintone);
+        hairStyleLayer = (ImageView) itemView.findViewById(R.id.vh_hair);
+        beardLayer = (ImageView) itemView.findViewById(R.id.vh_beard);
+        accessoryLayer = (ImageView) itemView.findViewById(R.id.vh_accessory);
+
+        prisoner = PrisonerBuilder.createPrisoner();
+
+        setEyeLayer(prisoner.getEyeColor());
+        setSkintoneLayer(prisoner.getSkintone());
+        setHairLayer(prisoner.getHairStyle());
+        setBeardLayer(prisoner.getBeard());
     }
 
     public void generateNewPrisonerSprite() {
@@ -63,6 +78,7 @@ public class PrisonerHelper {
         setSkintoneLayer(prisoner.getSkintone());
         setHairLayer(prisoner.getHairStyle());
         setBeardLayer(prisoner.getBeard());
+        setAccessoryLayer(prisoner.getHasGlasses());
     }
 
     public void setBeardLayer(int beard) {
