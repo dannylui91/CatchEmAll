@@ -45,8 +45,10 @@ public class PrisonCell extends AppCompatActivity {
             public void onClick(View view) {
                 PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(PrisonCell.this);
                 db = dbHelper.getWritableDatabase();
-                prisoner.setLastInspected(System.currentTimeMillis());
+                long currentTime = System.currentTimeMillis();
+                prisoner.setLastInspected(currentTime);
                 cupboard().withDatabase(db).put(prisoner);
+                setViews(prisoner);
                 CellBlock cell = (CellBlock) CellBlock.activity;
                 cell.refreshRecyclerView();
             }
