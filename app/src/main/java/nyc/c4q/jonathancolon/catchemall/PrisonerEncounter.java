@@ -57,7 +57,6 @@ public class PrisonerEncounter extends AppCompatActivity {
     }
 
     private void initViews() {
-        createPrisonerButton = (Button) findViewById(R.id.prisoner_button);
         nameLayer = (TextView)findViewById(R.id.prisoner_name);
         capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
     }
