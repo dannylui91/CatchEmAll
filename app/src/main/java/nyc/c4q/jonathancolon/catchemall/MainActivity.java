@@ -5,10 +5,9 @@ import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import java.util.List;
 
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
@@ -66,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements PrisonerAdapter.L
 
     @Override
     public void onPrisonerClicked(Prisoner prisoner) {
-        System.out.println("Clicked a prisoner");
+        System.out.println("Clicked prisoner: " + prisoner.getFirstName() + " " + prisoner.getLastName());
         //logic after clicking one of the prisoners
-
+        Intent intent = new Intent(this, ThirdActivity.class);
+        intent.putExtra(ThirdActivity.PRISONER_KEY, prisoner);
+        startActivity(intent);
     }
 }

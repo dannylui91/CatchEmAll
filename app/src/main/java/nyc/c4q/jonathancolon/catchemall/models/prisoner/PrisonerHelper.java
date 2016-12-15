@@ -38,7 +38,7 @@ public class PrisonerHelper {
         beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
         accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
 
-        prisoner = PrisonerBuilder.createPrisoner();
+        //prisoner = PrisonerBuilder.createPrisoner();
         setNameLayer(prisoner);
         setEyeLayer(prisoner.getEyeColor());
         setSkintoneLayer(prisoner.getSkintone());
@@ -56,7 +56,7 @@ public class PrisonerHelper {
         beardLayer = (ImageView) itemView.findViewById(R.id.vh_beard);
         accessoryLayer = (ImageView) itemView.findViewById(R.id.vh_accessory);
 
-        prisoner = PrisonerBuilder.createPrisoner();
+        //prisoner = PrisonerBuilder.createPrisoner();
 
         setEyeLayer(prisoner.getEyeColor());
         setSkintoneLayer(prisoner.getSkintone());
