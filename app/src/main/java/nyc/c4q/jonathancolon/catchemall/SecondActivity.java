@@ -13,7 +13,6 @@ import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerAttributes;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 
-import static android.view.View.GONE;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class SecondActivity extends AppCompatActivity {
@@ -36,8 +35,10 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
+        PrisonerHelper prisonerHelper = new PrisonerHelper(this);
 
-        displayPrisoner(prisoner);
+        prisonerHelper.updatePrisonerSpriteView(prisoner);
+
 
         createPrisonerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,25 +54,9 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        eyeColorLayer = (ImageView) findViewById(R.id.eyes);
-        skinToneLayer = (ImageView) findViewById(R.id.skintone);
-        hairStyleLayer = (ImageView) findViewById(R.id.hair);
-        beardLayer = (ImageView) findViewById(R.id.beard);
-        accessoryLayer = (ImageView) findViewById(R.id.accessory);
         createPrisonerButton = (Button) findViewById(R.id.prisoner_button);
     }
 
-    private void displayPrisoner(Prisoner prisoner) {
-        eyeColorLayer.setImageResource(PrisonerHelper.getEyeLayer(prisoner.getEyeColor()));
-        skinToneLayer.setImageResource(PrisonerHelper.getSkintoneLayer(prisoner.getSkintone()));
-        hairStyleLayer.setImageResource(PrisonerHelper.getHairLayer(prisoner.getHairStyle()));
-
-        if (!(prisoner.getBeard() > 3)) {
-            beardLayer.setImageResource(PrisonerHelper.getBeardLayer(prisoner.getBeard()));
-        } else{
-            beardLayer.setVisibility(GONE);
-        }
-    }
 
     //unused, could be added to PrisonerHelper
     private void setAccessoryLayer(boolean hasGlasses) {
