@@ -83,10 +83,19 @@ public class PrisonerAdapter extends RecyclerView.Adapter<PrisonerAdapter.Prison
                     listener.onPrisonerClicked(prisoner);
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onPrisonerLongClicked(prisoner);
+                    return true;
+                }
+            });
         }
     }
 
     interface Listener {
         void onPrisonerClicked(Prisoner prisoner);
+        void onPrisonerLongClicked(Prisoner prisoner);
     }
 }

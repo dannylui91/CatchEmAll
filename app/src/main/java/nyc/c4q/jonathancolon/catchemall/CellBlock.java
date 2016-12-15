@@ -1,5 +1,6 @@
 package nyc.c4q.jonathancolon.catchemall;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,19 +17,23 @@ import nyc.c4q.jonathancolon.catchemall.service.MyService;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.SqlHelper;
 
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
+
 public class CellBlock extends AppCompatActivity implements PrisonerAdapter.Listener {
     private static final String TAG = CellBlock.class.getName();
     private static PrisonerDatabaseHelper prisonerDatabaseHelper;
     private SQLiteDatabase db;
     private RecyclerView recyclerView;
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cellblock);
+        this.activity = this;
 
         setupRecyclerView();
-        populateRecyclerFromDb();
+        refreshRecyclerView();
 
         if (!MyService.hasStarted) {
             System.out.println("CellBlock: starting service");
@@ -36,7 +41,7 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
         }
     }
 
-    private void populateRecyclerFromDb() {
+    public void refreshRecyclerView() {
         PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(this);
         db = dbHelper.getWritableDatabase();
         List<Prisoner> prisoners = SqlHelper.selectAllPrisoners(db);
@@ -70,5 +75,11 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
         Intent intent = new Intent(this, PrisonCell.class);
         intent.putExtra(PrisonCell.PRISONER_KEY, prisoner);
         startActivity(intent);
+    }
+
+    @Override
+    public void onPrisonerLongClicked(Prisoner prisoner) {
+        cupboard().withDatabase(db).delete(prisoner);
+        refreshRecyclerView();
     }
 }
