@@ -35,5 +35,4 @@ public class MainActivity extends AppCompatActivity {
     public static void onPrisonerCapture(Prisoner prisoner) {
         System.out.println("Capturing prisoner");
     }
-
 }
