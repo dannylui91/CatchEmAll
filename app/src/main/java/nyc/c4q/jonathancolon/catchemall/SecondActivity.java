@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerAttributes;
@@ -25,6 +26,7 @@ public class SecondActivity extends AppCompatActivity {
     private Button createPrisonerButton;
 
     private static SQLiteDatabase db;
+    private TextView nameLayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class SecondActivity extends AppCompatActivity {
         PrisonerHelper prisonerHelper = new PrisonerHelper(this);
 
         prisonerHelper.updatePrisonerSpriteView(prisoner);
+        nameLayer.setText(prisoner.getFirstName() + " " + prisoner.getLastName());
 
 
         createPrisonerButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +58,7 @@ public class SecondActivity extends AppCompatActivity {
 
     private void initViews() {
         createPrisonerButton = (Button) findViewById(R.id.prisoner_button);
+        nameLayer = (TextView)findViewById(R.id.prisoner_name);
     }
 
 

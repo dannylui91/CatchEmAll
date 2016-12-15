@@ -17,6 +17,10 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
  */
 
 public class SqlHelper {
+
+    public SqlHelper() {
+    }
+
     public static List<Prisoner> selectAllPrisoners(SQLiteDatabase db) {
         List<Prisoner> prisoners = new ArrayList<>();
         try {

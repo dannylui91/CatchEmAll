@@ -3,6 +3,7 @@ package nyc.c4q.jonathancolon.catchemall.models.prisoner;
 import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import nyc.c4q.jonathancolon.catchemall.R;
 
@@ -19,6 +20,7 @@ public class PrisonerHelper {
     private ImageView hairStyleLayer;
     private ImageView accessoryLayer;
     private ImageView beardLayer;
+    private TextView nameLayer;
 
     Context context;
 
@@ -33,13 +35,18 @@ public class PrisonerHelper {
         hairStyleLayer = (ImageView) ((Activity) context).findViewById(R.id.hair);
         beardLayer = (ImageView) ((Activity) context).findViewById(R.id.beard);
         accessoryLayer = (ImageView) ((Activity) context).findViewById(R.id.accessory);
+        nameLayer = (TextView) ((Activity) context).findViewById(R.id.prisoner_name);
 
 
         prisoner = PrisonerBuilder.createPrisoner();
+        setNameLayer(prisoner);
         setEyeLayer(prisoner.getEyeColor());
         setSkintoneLayer(prisoner.getSkintone());
         setHairLayer(prisoner.getHairStyle());
         setBeardLayer(prisoner.getBeard());
+    }
+
+    private void setNameLayer(Prisoner prisoner) {
     }
 
     public void generateNewPrisonerSprite() {
@@ -51,6 +58,7 @@ public class PrisonerHelper {
 
 
         Prisoner prisoner = PrisonerBuilder.createPrisoner();
+
         setEyeLayer(prisoner.getEyeColor());
         setSkintoneLayer(prisoner.getSkintone());
         setHairLayer(prisoner.getHairStyle());

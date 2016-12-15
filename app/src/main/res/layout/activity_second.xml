@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="nyc.c4q.jonathancolon.catchemall.SecondActivity">
 
+    <!--  Place the objects you want on the bottom here -->
     <RelativeLayout
         android:id="@+id/skintone_layer"
         android:layout_height="match_parent"
@@ -31,7 +32,6 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
-        <!--  Place the objects you want on the top here -->
         <RelativeLayout
             android:id="@+id/hair_layer"
             android:layout_height="match_parent"
@@ -55,7 +55,6 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
-            <!--  Place the objects you want on the bottom here -->
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/accessory_layer"
@@ -68,7 +67,6 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
-            <!--  Place the objects you want on the bottom here -->
         </RelativeLayout>
         <RelativeLayout
             android:layout_height="match_parent"
@@ -82,7 +80,24 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" />
 
-            <!--  Place the objects you want on the bottom here -->
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:id="@+id/prisoner_name"
+                android:text="Unknown Prisoner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:layout_marginTop="26dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+        <!--  Place the objects you want on the top here -->
+
     </RelativeLayout>
 </FrameLayout>

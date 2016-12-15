@@ -97,4 +97,6 @@ public class Prisoner implements Serializable {
     public void setLastInspected(Long lastInspected) {
         this.lastInspected = lastInspected;
     }
+
+
 }
