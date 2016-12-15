@@ -84,20 +84,28 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_capture_prisoner"
-                android:layout_gravity="bottom|end"
-                android:src="@android:drawable/ic_lock_idle_lock"
-                android:layout_marginLeft="@dimen/fab_margin"
-                android:layout_marginRight="24dp"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="30dp" />
+
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_capture_prisoner"
+            android:src="@android:drawable/ic_lock_idle_lock"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="25dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="40dp" />
         <!--  Place the objects you want on the top here -->
 
     </RelativeLayout>
