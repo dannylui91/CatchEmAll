@@ -56,8 +56,6 @@ public class PrisonerEncounter extends AppCompatActivity {
                 Intent intent = new Intent(PrisonerEncounter.this, CellBlock.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-
-
                 startActivity(intent);
                 finish();
             }
@@ -68,6 +66,7 @@ public class PrisonerEncounter extends AppCompatActivity {
         nameLayer = (TextView)findViewById(R.id.prisoner_name);
         capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
         prisonBars = (ImageView) findViewById(R.id.prison_bars);
+
     }
 
     public void closeCellAnimation(View view) {
