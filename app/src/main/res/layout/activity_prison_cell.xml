@@ -65,16 +65,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
 
         </RelativeLayout>
 
         <!--  Place the objects you want on the top here -->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/prison_bars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/prison_bars"/>
 
     </RelativeLayout>
 
@@ -87,6 +94,7 @@
             android:layout_height="wrap_content"
             android:background="#000000"
             android:layout_marginTop="10dp"
+            android:elevation="10dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true">
 

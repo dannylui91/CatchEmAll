@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -17,6 +20,7 @@ import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 
+import static android.view.View.GONE;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class PrisonCell extends AppCompatActivity {
@@ -24,8 +28,10 @@ public class PrisonCell extends AppCompatActivity {
     private TextView nameLayer;
     private Button lockBtn;
     private FloatingActionButton inspectLockBtn;
+    Animation openCellAnimation;
 
     private SQLiteDatabase db;
+    private ImageView prisonBars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,31 @@ public class PrisonCell extends AppCompatActivity {
         setContentView(R.layout.activity_prison_cell);
         nameLayer = (TextView) findViewById(R.id.prisoner_info);
         inspectLockBtn = (FloatingActionButton) findViewById(R.id.fab_inspect_lock);
+        prisonBars = (ImageView) findViewById(R.id.prison_bars);
+        openCellAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.open_cell);
+
+        Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                prisonBars.startAnimation(openCellAnimation);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                prisonBars.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        };
+
+        openCellAnimation.setAnimationListener(animationListener);
+        animationListener.onAnimationStart(openCellAnimation);
+
 
         Intent intent = getIntent();
         Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
@@ -40,6 +71,8 @@ public class PrisonCell extends AppCompatActivity {
         setViews(prisoner);
         inspectLockBtn.setOnClickListener(onClickInspectLock(prisoner));
     }
+
+
 
     private View.OnClickListener onClickInspectLock(final Prisoner prisoner) {
         return new View.OnClickListener() {

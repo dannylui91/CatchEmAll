@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,9 +25,11 @@ public class PrisonerEncounter extends AppCompatActivity {
     private ImageView accessoryLayer;
     private ImageView beardLayer;
     private Button createPrisonerButton;
+    private Animation closeCellAnimation;
     private FloatingActionButton capturePrisonerButton;
     private static SQLiteDatabase db;
     private TextView nameLayer;
+    private ImageView prisonBars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class PrisonerEncounter extends AppCompatActivity {
                 cupboard().withDatabase(db).put(prisoner);
                 Intent intent = new Intent(PrisonerEncounter.this, CellBlock.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+
                 startActivity(intent);
                 finish();
             }
@@ -61,6 +67,11 @@ public class PrisonerEncounter extends AppCompatActivity {
     private void initViews() {
         nameLayer = (TextView)findViewById(R.id.prisoner_name);
         capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
+        prisonBars = (ImageView) findViewById(R.id.prison_bars);
+    }
+
+    public void closeCellAnimation(View view) {
+        prisonBars.startAnimation(closeCellAnimation);
     }
 
 }

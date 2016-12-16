@@ -74,6 +74,7 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
         //logic after clicking one of the prisoners
         Intent intent = new Intent(this, PrisonCell.class);
         intent.putExtra(PrisonCell.PRISONER_KEY, prisoner);
+
         startActivity(intent);
     }
 
