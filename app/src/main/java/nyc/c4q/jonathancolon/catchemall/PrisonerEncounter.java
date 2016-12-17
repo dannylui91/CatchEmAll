@@ -13,6 +13,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
@@ -26,6 +28,7 @@ public class PrisonerEncounter extends AppCompatActivity {
     private static SQLiteDatabase db;
     private TextView nameLayer;
     private ImageView prisonBars;
+    private ImageView encounterBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,8 @@ public class PrisonerEncounter extends AppCompatActivity {
         capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
         prisonBars = (ImageView) findViewById(R.id.encounter_prison_bars);
         prisonBars.setTranslationX(-getPhoneWidth()); //sets the prison bars to the left of the screen on load
+        encounterBackground = (ImageView) findViewById(R.id.encounter_image);
+        Picasso.with(this).load(R.drawable.background_encounter_happy).fit().into(encounterBackground);
     }
 
     private int getPhoneWidth() {

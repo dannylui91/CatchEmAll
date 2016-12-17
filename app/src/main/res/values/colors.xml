@@ -3,4 +3,7 @@
     <color name="colorPrimary">#e67e22</color>
     <color name="colorPrimaryDark">#d35400</color>
     <color name="colorAccent">#3498db</color>
+
+    <color name="cellBlockGrey">#7f7474</color>
+    <color name="prisonerItemDark">#473f3f</color>
 </resources>

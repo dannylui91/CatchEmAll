@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context="nyc.c4q.jonathancolon.catchemall.PrisonerEncounter">
 
+    <ImageView
+        android:id="@+id/encounter_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <!--  Place the objects you want on the bottom here -->
     <RelativeLayout
         android:id="@+id/skintone_layer"
