@@ -51,7 +51,12 @@ public class PrisonCell extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+<<<<<<< HEAD
 
+//                prisonBars.setVisibility(View.INVISIBLE);
+=======
+                prisonBars.setVisibility(GONE);
+>>>>>>> 012e6b74a40b3e85bf8381e3888b49637d976719
             }
 
             @Override
