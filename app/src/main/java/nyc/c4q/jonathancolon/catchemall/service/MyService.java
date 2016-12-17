@@ -7,19 +7,26 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
 
-import nyc.c4q.jonathancolon.catchemall.R;
+import java.util.List;
+
 import nyc.c4q.jonathancolon.catchemall.PrisonerEncounter;
+import nyc.c4q.jonathancolon.catchemall.R;
 import nyc.c4q.jonathancolon.catchemall.models.UinamesModel;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerBuilder;
 import nyc.c4q.jonathancolon.catchemall.networks.UinamesClient;
+import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
+import nyc.c4q.jonathancolon.catchemall.sqlite.SqlHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 /**
  * Created by Danny on 12/13/2016.
@@ -28,6 +35,10 @@ public class MyService extends IntentService {
     private UinamesClient client;
     public static boolean hasStarted = false;
     private static Long lastCreatedPrisoner = System.currentTimeMillis();
+    private static final int ONE_MINUTE_IN_MILLIS = 60000;
+    private static final int TWELVE_HOURS_IN_MILLIS = 43200000;
+
+    private SQLiteDatabase db;
 
     public MyService() {
         super("MyService");
@@ -71,10 +82,19 @@ public class MyService extends IntentService {
                     Toast.makeText(MyService.this, "Failed to retrieve name data.", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
-
         }
+
+        PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(getApplicationContext());
+        db = dbHelper.getWritableDatabase();
+        List<Prisoner> prisoners = SqlHelper.selectAllPrisoners(db);
+        System.out.println();
+        for (int i = 0; i < prisoners.size(); i++) {
+            System.out.println(prisoners.get(i).getFirstName() + ": " + (System.currentTimeMillis() - prisoners.get(i).getLastInspected()));
+            if (System.currentTimeMillis() - prisoners.get(i).getLastInspected() > TWELVE_HOURS_IN_MILLIS) {
+                cupboard().withDatabase(db).delete(prisoners.get(i));
+            }
+        }
+
     }
 
 

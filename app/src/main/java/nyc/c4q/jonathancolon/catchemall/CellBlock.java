@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,10 +65,6 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
         sendBroadcast(intent);
     }
 
-    public static void onPrisonerCapture(Prisoner prisoner) {
-        System.out.println("Capturing prisoner");
-    }
-
     @Override
     public void onPrisonerClicked(Prisoner prisoner) {
         System.out.println("Clicked prisoner: " + prisoner.getFirstName() + " " + prisoner.getLastName());
@@ -82,5 +79,6 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
     public void onPrisonerLongClicked(Prisoner prisoner) {
         cupboard().withDatabase(db).delete(prisoner);
         refreshRecyclerView();
+        Toast.makeText(activity, "You freed a prisoner!", Toast.LENGTH_SHORT).show();
     }
 }
