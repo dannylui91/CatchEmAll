@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -51,22 +50,10 @@ public class PrisonerAdapter extends RecyclerView.Adapter<PrisonerAdapter.Prison
     }
 
     public class PrisonerViewHolder extends RecyclerView.ViewHolder {
-        private ImageView eyeColorLayer;
-        private ImageView skinToneLayer;
-        private ImageView hairStyleLayer;
-        private ImageView accessoryLayer;
-        private ImageView beardLayer;
-
         private TextView nameTv;
 
         public PrisonerViewHolder(View itemView) {
             super(itemView);
-            eyeColorLayer = (ImageView) itemView.findViewById(R.id.vh_eyes);
-            skinToneLayer = (ImageView) itemView.findViewById(R.id.vh_skintone);
-            hairStyleLayer = (ImageView) itemView.findViewById(R.id.vh_hair);
-            beardLayer = (ImageView) itemView.findViewById(R.id.vh_beard);
-            accessoryLayer = (ImageView) itemView.findViewById(R.id.vh_accessory);
-
             nameTv = (TextView) itemView.findViewById(R.id.vh_name);
         }
 

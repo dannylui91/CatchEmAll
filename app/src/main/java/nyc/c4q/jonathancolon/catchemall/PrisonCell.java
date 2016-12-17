@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +25,6 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 public class PrisonCell extends AppCompatActivity {
     public static final String PRISONER_KEY = "prisoner_key_third_activity";
     private TextView nameLayer;
-    private Button lockBtn;
     private FloatingActionButton inspectLockBtn;
     Animation openCellAnimation;
 
@@ -51,7 +49,6 @@ public class PrisonCell extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-
                 prisonBars.setVisibility(GONE);
             }
 
