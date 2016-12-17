@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_prison_encounter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nyc.c4q.jonathancolon.catchemall.PrisonerEncounter">
+
+    <!--  Place the objects you want on the bottom here -->
+    <RelativeLayout
+        android:id="@+id/skintone_layer"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <ImageView
+            android:id="@+id/skintone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/prisoner_skintone_2_300_180"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/eye_layer">
+        <ImageView
+            android:id="@+id/eyes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/prisoner_eyes_brown_300_180"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:id="@+id/hair_layer"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ImageView
+                android:id="@+id/hair"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/prisoner_hair_combover_black_300_180"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/beard_layer"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ImageView
+                android:id="@+id/beard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/accessory_layer"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <ImageView
+                android:id="@+id/accessory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:id="@+id/prisoner_name"
+                android:text="Unknown Prisoner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:layout_marginTop="26dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/encounter_prison_bars"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/prison_bars"/>
+
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_capture_prisoner"
+            android:src="@android:drawable/ic_lock_idle_lock"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="25dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="40dp" />
+        <!--  Place the objects you want on the top here -->
+
+    </RelativeLayout>
+</FrameLayout>
