@@ -1,5 +1,6 @@
 package nyc.c4q.jonathancolon.catchemall;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,15 +20,14 @@ import nyc.c4q.jonathancolon.catchemall.models.prisoner.Prisoner;
 import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 import nyc.c4q.jonathancolon.catchemall.sqlite.PrisonerDatabaseHelper;
 
-import static android.view.View.GONE;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class PrisonCell extends AppCompatActivity {
     public static final String PRISONER_KEY = "prisoner_key_third_activity";
     private TextView nameLayer;
-    private Button lockBtn;
     private FloatingActionButton inspectLockBtn;
-    Animation openCellAnimation;
+    private Animation openCellAnimation;
+    private Animation closeCellAnimation;
 
     private SQLiteDatabase db;
     private ImageView prisonBars;
@@ -44,15 +43,16 @@ public class PrisonCell extends AppCompatActivity {
                 R.anim.open_cell);
 
         Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+
             @Override
             public void onAnimationStart(Animation animation) {
-                prisonBars.startAnimation(openCellAnimation);
+                prisonBars.animate().translationX(-1300).setDuration(1500);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
 
-                prisonBars.setVisibility(GONE);
+//                prisonBars.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -66,28 +66,28 @@ public class PrisonCell extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
+        final Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
 
         setViews(prisoner);
-        inspectLockBtn.setOnClickListener(onClickInspectLock(prisoner));
-    }
 
+        closeCellAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.close_cell);
+        final Animation.AnimationListener closeCellAnimationListener = getAnimationListener();
+        closeCellAnimation.setAnimationListener(closeCellAnimationListener);
 
-
-    private View.OnClickListener onClickInspectLock(final Prisoner prisoner) {
-        return new View.OnClickListener() {
+        inspectLockBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                closeCellAnimationListener.onAnimationStart(closeCellAnimation);
                 PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(PrisonCell.this);
                 db = dbHelper.getWritableDatabase();
                 long currentTime = System.currentTimeMillis();
                 prisoner.setLastInspected(currentTime);
                 cupboard().withDatabase(db).put(prisoner);
                 setViews(prisoner);
-                CellBlock cell = (CellBlock) CellBlock.activity;
-                cell.refreshRecyclerView();
             }
-        };
+        });
+
     }
 
     private void setViews(Prisoner prisoner) {
@@ -102,6 +102,46 @@ public class PrisonCell extends AppCompatActivity {
         SimpleDateFormat timeDateFormatter = new SimpleDateFormat("hh:mm:ss a");
         String lastInspectedTimeFormatted = timeDateFormatter.format(new Date(prisoner.getLastInspected()));
 
-        nameLayer.setText(prisonerName + "\n" + imprisonDateFormatted + "\n" + lastInspectedTimeFormatted);
+        nameLayer.setText(prisonerName + "\n\n" + "Last Lock Inspection: \n" + imprisonDateFormatted + "\n" + lastInspectedTimeFormatted);
+    }
+
+    private Animation.AnimationListener getAnimationListener() {
+        return new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                prisonBars.animate().translationX(0).setDuration(1500).setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        Intent intent = new Intent(PrisonCell.this, CellBlock.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        };
     }
 }

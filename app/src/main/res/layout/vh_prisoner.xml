@@ -12,7 +12,7 @@
         android:id="@+id/vh_prison_cell"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/prisonerItemDark"
+        android:background="@color/prisonerItemLight"
         tools:context="nyc.c4q.jonathancolon.catchemall.PrisonerEncounter">
 
         <RelativeLayout
