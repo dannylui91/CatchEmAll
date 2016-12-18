@@ -8,8 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,92 +21,77 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class PrisonerEncounter extends AppCompatActivity {
     public static final String PRISONER_KEY = "prisoner_key";
-    private Animation closeCellAnimation;
+
     private FloatingActionButton capturePrisonerButton;
-    private static SQLiteDatabase db;
-    private TextView nameLayer;
-    private ImageView prisonBars;
     private ImageView encounterBackground;
+    private ImageView prisonBars;
+    private TextView nameLayer;
+
+    private Prisoner prisoner;
+    private static SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prisoner_encounter);
 
+        prisoner = (Prisoner) getIntent().getExtras().getSerializable(PRISONER_KEY);
+
         initViews();
+        setupPrisonBarAnimation();
+    }
 
-        Intent intent = getIntent();
-        final Prisoner prisoner = (Prisoner) intent.getExtras().getSerializable(PRISONER_KEY);
-        PrisonerHelper prisonerHelper = new PrisonerHelper(this);
+    private void initViews() {
+        capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
+        encounterBackground = (ImageView) findViewById(R.id.encounter_image);
+        prisonBars = (ImageView) findViewById(R.id.encounter_prison_bars);
+        nameLayer = (TextView) findViewById(R.id.prisoner_name);
 
-        prisonerHelper.updatePrisonerSpriteView(prisoner);
+        prisonBars.setTranslationX(-getPhoneWidth()); //sets the prison bars to the left of the screen on load
+        Picasso.with(this).load(R.drawable.background_encounter_happy).fit().into(encounterBackground);
         nameLayer.setText(prisoner.getFirstName() + " " + prisoner.getLastName());
+        PrisonerHelper prisonerHelper = new PrisonerHelper(this);
+        prisonerHelper.updatePrisonerSpriteView(prisoner);
+    }
 
-        closeCellAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.close_cell);
-        final Animation.AnimationListener animationListener = getAnimationListener();
-        closeCellAnimation.setAnimationListener(animationListener);
-
+    private void setupPrisonBarAnimation() {
         capturePrisonerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                animationListener.onAnimationStart(closeCellAnimation);
-                PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(PrisonerEncounter.this);
-                db = dbHelper.getWritableDatabase();
-                cupboard().withDatabase(db).put(prisoner);
+                capturePrisonerButton.setClickable(false);
+                closeCellAnimation();
             }
         });
     }
 
-    private Animation.AnimationListener getAnimationListener() {
-        return new Animation.AnimationListener() {
+    private void closeCellAnimation() {
+        prisonBars.animate().translationX(0).setDuration(2000).setListener(new Animator.AnimatorListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-                prisonBars.animate().translationX(0).setDuration(2000).setListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        Intent intent = new Intent(PrisonerEncounter.this, CellBlock.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {
-
-                    }
-                });
+            public void onAnimationStart(Animator animator) {
+                PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(PrisonerEncounter.this);
+                db = dbHelper.getWritableDatabase();
+                cupboard().withDatabase(db).put(prisoner);
             }
 
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(Animator animator) {
+                Intent intent = new Intent(PrisonerEncounter.this, CellBlock.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
 
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
+            public void onAnimationRepeat(Animator animator) {
 
             }
-        };
-    }
-
-    private void initViews() {
-        nameLayer = (TextView)findViewById(R.id.prisoner_name);
-        capturePrisonerButton = (FloatingActionButton) findViewById(R.id.fab_capture_prisoner);
-        prisonBars = (ImageView) findViewById(R.id.encounter_prison_bars);
-        prisonBars.setTranslationX(-getPhoneWidth()); //sets the prison bars to the left of the screen on load
-        encounterBackground = (ImageView) findViewById(R.id.encounter_image);
-        Picasso.with(this).load(R.drawable.background_encounter_happy).fit().into(encounterBackground);
+        });
     }
 
     private int getPhoneWidth() {
@@ -117,5 +100,4 @@ public class PrisonerEncounter extends AppCompatActivity {
         int width = displaymetrics.widthPixels;
         return width;
     }
-
 }

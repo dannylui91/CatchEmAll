@@ -18,8 +18,7 @@ import nyc.c4q.jonathancolon.catchemall.models.prisoner.PrisonerHelper;
 public class PrisonerAdapter extends RecyclerView.Adapter<PrisonerAdapter.PrisonerViewHolder> {
     private Listener listener;
     private List<Prisoner> prisoners;
-    Context context;
-
+    private Context context;
 
     public PrisonerAdapter(Listener listener) {
         this.listener = listener;
