@@ -118,7 +118,7 @@ public class MyService extends IntentService {
 
         // Attach the pendingIntent to a new notification using setContentIntent
         Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.notification_icon_cop_jon)
                 .setContentTitle("Spotted an Escapee!")
                 .setContentText(prisoner.getFirstName() + " " + prisoner.getLastName())
                 .setContentIntent(pendingIntent)

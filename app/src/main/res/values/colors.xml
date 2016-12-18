@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e67e22</color>
+    <color name="colorPrimary">#EC882F</color>
     <color name="colorPrimaryDark">#d35400</color>
-    <color name="colorAccent">#3498db</color>
+    <color name="colorAccent">#f1c40f</color>
+
+    <color name="cellBlockGrey">#455A64</color>
+    <color name="prisonerItemLight">#607D8B</color>
 </resources>

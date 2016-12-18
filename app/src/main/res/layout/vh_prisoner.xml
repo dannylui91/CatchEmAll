@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="150dp">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    app:cardElevation="10dp"
+    android:layout_margin="5dp">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/vh_prison_cell"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/prisonerItemLight"
         tools:context="nyc.c4q.jonathancolon.catchemall.PrisonerEncounter">
 
         <RelativeLayout
@@ -89,7 +94,5 @@
                 android:textColor="#FFFFFFFF"
                 android:background="#FF000000"/>
         </RelativeLayout>
-
-        
     </FrameLayout>
-</LinearLayout>
+</android.support.v7.widget.CardView>
