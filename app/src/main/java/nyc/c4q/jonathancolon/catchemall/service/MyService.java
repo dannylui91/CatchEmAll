@@ -32,11 +32,11 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
  * Created by Danny on 12/13/2016.
  */
 public class MyService extends IntentService {
-    private UinamesClient client;
-    public static boolean hasStarted = false;
-    private static Long lastCreatedPrisoner = System.currentTimeMillis();
-    private static final int ONE_MINUTE_IN_MILLIS = 60000;
     private static final int TWELVE_HOURS_IN_MILLIS = 43200000;
+    private static final int ONE_MINUTE_IN_MILLIS = 60000;
+
+    private static Long lastCreatedPrisoner = System.currentTimeMillis();
+    public static boolean hasStarted = false;
 
     private SQLiteDatabase db;
 
@@ -49,21 +49,23 @@ public class MyService extends IntentService {
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         WakefulBroadcastReceiver.completeWakefulIntent(intent);
 
-        System.out.println("SERVICE CALLED");
+        System.out.println("Called IntentService...");
 
         if (!hasStarted) { // Needed or else it'll keep scheduling new alarms and you'll be swarmed with notifications
-            System.out.println("Setting alarm");
+            System.out.println("Setting alarm for service...");
             scheduleAlarm();
             hasStarted = true;
         }
 
-        // Do the task here
-        if (lastCreatedPrisoner + 60000L < System.currentTimeMillis()) {
-            System.out.println("lastCreated: " + lastCreatedPrisoner);
-            System.out.println("currentTime: " + System.currentTimeMillis());
+        generateRandomPrisoner();
+        checkInspectionTime();
+    }
+
+    private void generateRandomPrisoner() {
+        if (lastCreatedPrisoner + ONE_MINUTE_IN_MILLIS < System.currentTimeMillis()) {
             lastCreatedPrisoner = System.currentTimeMillis();
 
-            client = UinamesClient.getInstance();
+            UinamesClient client = UinamesClient.getInstance();
             Call<UinamesModel> call = client.getRandomName();
             call.enqueue(new Callback<UinamesModel>() {
                 @Override
@@ -83,24 +85,22 @@ public class MyService extends IntentService {
                 }
             });
         }
+    }
 
+    private void checkInspectionTime() {
         PrisonerDatabaseHelper dbHelper = PrisonerDatabaseHelper.getInstance(getApplicationContext());
         db = dbHelper.getWritableDatabase();
         List<Prisoner> prisoners = SqlHelper.selectAllPrisoners(db);
-        System.out.println();
         for (int i = 0; i < prisoners.size(); i++) {
-            System.out.println(prisoners.get(i).getFirstName() + ": " + (System.currentTimeMillis() - prisoners.get(i).getLastInspected()));
             if (System.currentTimeMillis() - prisoners.get(i).getLastInspected() > TWELVE_HOURS_IN_MILLIS) {
                 cupboard().withDatabase(db).delete(prisoners.get(i));
             }
         }
-
     }
-
 
     public Prisoner generatePrisonerSprite(){
         Prisoner prisoner = PrisonerBuilder.createPrisoner();
-        System.out.println("CALLED A NEW PRISONER");
+        System.out.println("** Magically create a new prisoner **");
         return prisoner;
     }
 
@@ -136,7 +136,7 @@ public class MyService extends IntentService {
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
         Intent i = new Intent(this, MyService.class);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000L, pi);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), ONE_MINUTE_IN_MILLIS, pi);
     }
 
     public void cancelAlarm() {

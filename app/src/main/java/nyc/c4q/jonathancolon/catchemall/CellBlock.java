@@ -21,11 +21,10 @@ import nyc.c4q.jonathancolon.catchemall.sqlite.SqlHelper;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class CellBlock extends AppCompatActivity implements PrisonerAdapter.Listener {
-    private static final String TAG = CellBlock.class.getName();
-    private static PrisonerDatabaseHelper prisonerDatabaseHelper;
-    private SQLiteDatabase db;
     private RecyclerView recyclerView;
     public static Activity activity;
+
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +32,14 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
         setContentView(R.layout.activity_cellblock);
         this.activity = this;
 
+        checkServiceCreated();
         setupRecyclerView();
         refreshRecyclerView();
+    }
 
+    public void checkServiceCreated() {
         if (!MyService.hasStarted) {
-            System.out.println("CellBlock: starting service");
+            System.out.println("Starting service...");
             startService();
         }
     }
@@ -67,11 +69,8 @@ public class CellBlock extends AppCompatActivity implements PrisonerAdapter.List
 
     @Override
     public void onPrisonerClicked(Prisoner prisoner) {
-        System.out.println("Clicked prisoner: " + prisoner.getFirstName() + " " + prisoner.getLastName());
-        //logic after clicking one of the prisoners
         Intent intent = new Intent(this, PrisonCell.class);
         intent.putExtra(PrisonCell.PRISONER_KEY, prisoner);
-
         startActivity(intent);
     }
 
